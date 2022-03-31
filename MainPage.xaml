@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CustomScale.MainPage"
+             xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+             xmlns:local="clr-namespace:CustomScale"
+             BackgroundColor="{DynamicResource SecondaryColor}">
+
+    <gauge:SfRadialGauge>
+        <gauge:SfRadialGauge.Axes>
+            <local:RadialAxisExt Minimum="1" Maximum="10000">
+                <local:RadialAxisExt.Pointers>
+                    <gauge:NeedlePointer Value="1000"/>
+                </local:RadialAxisExt.Pointers>
+            </local:RadialAxisExt>
+        </gauge:SfRadialGauge.Axes>
+    </gauge:SfRadialGauge>
+    
+</ContentPage>
