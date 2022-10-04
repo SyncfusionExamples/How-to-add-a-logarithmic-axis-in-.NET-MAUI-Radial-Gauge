@@ -1,101 +1,54 @@
-# How-to-add-a-logarithmic-axis-to-the-.NET-MAUI-Radial-Gauge
-This article describes how to add a logarithmic axis to the [Syncfusion .NET MAUI Radial Gauge](https://www.syncfusion.com/maui-controls/maui-radial-gauge) control.
+# How to add a logarithmic axis in .NET MAUI Radial Gauge
 
-**Step 1:** To add the logarithmic scale, first create a custom axis class by extending it from [RadialAxis](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.Gauges.RadialAxis.html?tabs=tabid-1) class.
+This repository contains sample for how to add a logarithmic axis in the [Syncfusion .NET MAUI Radial Gauge](https://help.syncfusion.com/maui/radial-gauge/getting-started) control.
 
-[C#]
-```
-public class RadialAxisExt : RadialAxis
-{
-    …
-}
-```
+Please refer the KB through this [link](https://www.syncfusion.com/kb/13091/how-to-add-a-logarithmic-scale-in-net-maui-radial-gauge-control-sfradialgauge).
 
-**Step 2:** To change the text value of the labels to the logarithmic label format, override the [GenerateVisibleLabels](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.Gauges.RadialAxis.html#Syncfusion_Maui_Gauges_RadialAxis_GenerateVisibleLabels) method in the custom axis class.
+## Syncfusion controls
 
-[C#]
-```
- protected override List<GaugeLabelInfo> GenerateVisibleLabels()
-{
-    List<GaugeLabelInfo> customLabels = new List<GaugeLabelInfo>();
+This project used the following Syncfusion control(s):
+* [SfRadialGauge](https://www.syncfusion.com/maui-controls/maui-radial-gauge)
 
-    var _minimum = (int)logBase(1, 10);
-    var _maximum = (int)logBase(10000, 10);
-    for (var i = _minimum; i <= _maximum; i++)
-    {
-        int value = (int)Math.Floor(Math.Pow(10, i));// logBase  value is 10
-        GaugeLabelInfo label = new GaugeLabelInfo
-        {
-            Value = value,
-            Text = value.ToString()
-        };
+## Supported platforms
 
-        customLabels.Add(label);
-    }
+.NET Multi-platform App UI (.NET MAUI) apps can be written for the following platforms:
 
-    labelsCount = customLabels.Count;
-    return customLabels;
-}
-```
- 
-``` 
-double logBase(double value, double baseValue)
-{
-    return Math.Log(value) / Math.Log(baseValue);
-}
-```
+* Android 5.0 (API 21) or higher.
+* iOS 10 or higher.
+* macOS 10.13 or higher, using Mac Catalyst.
+* Windows 11 and Windows 10 version 1809 or higher, using [Windows UI Library (WinUI) 3](https://learn.microsoft.com/en-us/windows/apps/winui/winui3/).
 
-**Step 3:** To find the axis factor values based on the respective logarithmic value, override the [ValueToFactor](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.Gauges.RadialAxis.html#Syncfusion_Maui_Gauges_RadialAxis_ValueToFactor_System_Double_) method of custom axis class and implement the below logic for converting the values.
+## Requirements to run the sample
 
-[C#]
-```
-public override double ValueToFactor(double value)
-{
-    return logBase(value, 10) / (labelsCount - 1);
-}
-```
+* [Visual Studio 2022 Preview](https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-notes-preview) version 17.3.4 or higher (.NET MAUI version 6.0.486) or [Visual Studio 2022 for Mac 17.4 Preview](https://visualstudio.microsoft.com/vs/mac/preview/).
+* .NET 6.0
 
-**Step 4:** Now, create the [RadialGauge](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.Gauges.SfRadialGauge.html) control by referring the getting started [link](https://help.syncfusion.com/maui/radialgauge/getting-started#creating-an-application-using-the-net-maui-radial-gauge) and using the custom radial axis class extended from the radial axis.
-  
-[XAML]
-```
-<gauge:SfRadialGauge>
-    <gauge:SfRadialGauge.Axes>
-        <local:RadialAxisExt Minimum="1" 
-                             Maximum="10000">
-            …
-        </local:RadialAxisExt>
-    </gauge:SfRadialGauge.Axes>
-</gauge:SfRadialGauge>
- ```
+Refer to the following link for more details: [System Requirements](https://help.syncfusion.com/maui/system-requirements)
 
-**Step 5:** Include the [NeedlePointer](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.Gauges.NeedlePointer.html) to annotate the desired value.
+## How to run the sample
 
-[XAML]
-```
-<local:RadialAxisExt.Pointers>
-   <gauge:NeedlePointer Value="1000" />
-</local:RadialAxisExt.Pointers>
-```
+1. Clone the sample and open it in Visual Studio 2022 Preview.
 
-[Output]
+   *Note: If you download the sample using the "Download ZIP" option, right-click it, select Properties, and then select Unblock.*
 
-![](Output.png)
+2. Register your license key in the App.cs file as demonstrated in the following code.
 
-## See also
+		public App()
+		{
+			//Register Syncfusion license
+			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR LICENSE KEY");
+		
+			InitializeComponent();
+		
+			MainPage = new MainPage();
+		}
+		
+	Refer to this [link](https://help.syncfusion.com/maui/licensing/overview) for more details.
+	
+3. Clean and build the application.
 
-[How to create an application using the .NET MAUI Radial Gauge?](https://help.syncfusion.com/maui/radialgauge/getting-started#creating-an-application-using-the-net-maui-radial-gauge)
+4. Run the application.
 
-[How to customize scale?](https://help.syncfusion.com/maui/radialgauge/axes#custom-scale-range)
+## License
 
-[How to customize Axis?](https://help.syncfusion.com/maui/radialgauge/axes#axis-customization)
-
-[How to customize Axis Label?](https://help.syncfusion.com/maui/radialgauge/axes?cs-save-lang=1&cs-lang=csharp#axis-label-customization)
-
-[How to customize Axis Label using Label Created Event?](https://help.syncfusion.com/maui/radialgauge/axes?cs-save-lang=1&cs-lang=csharp#labelcreated)
-
-[How to customize Ticks?](https://help.syncfusion.com/maui/radialgauge/axes?cs-save-lang=1&cs-lang=csharp#tick-customization)
-
-[How to customize the Needle pointer?](https://help.syncfusion.com/maui/radialgauge/needle-pointer#needle-customization)
-
-[How to position and customize annotation?](https://help.syncfusion.com/maui/radialgauge/annotation)
+Syncfusion has no liability for any damage or consequence that may arise by using or viewing the samples. The samples are for demonstrative purposes, and if you choose to use or access the samples, you agree to not hold Syncfusion liable, in any form, for any damage that is related to use, for accessing, or viewing the samples. By accessing, viewing, or seeing the samples, you acknowledge and agree Syncfusion’s samples will not allow you seek injunctive relief in any form for any claim related to the sample. If you do not agree to this, do not view, access, utilize, or otherwise do anything with Syncfusion’s samples.
