@@ -1,6 +1,6 @@
 # How to add a logarithmic axis in .NET MAUI Radial Gauge
 
-This repository contains sample for how to add a logarithmic axis in the [Syncfusion .NET MAUI Radial Gauge](https://help.syncfusion.com/maui/radial-gauge/getting-started) control.
+This repository contains sample to add a logarithmic axis in the [Syncfusion .NET MAUI Radial Gauge](https://help.syncfusion.com/maui/radial-gauge/getting-started) control.
 
 Please refer the KB through this [link](https://www.syncfusion.com/kb/13091/how-to-add-a-logarithmic-scale-in-net-maui-radial-gauge-control-sfradialgauge).
 
