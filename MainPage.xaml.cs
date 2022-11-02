@@ -18,7 +18,7 @@ public class RadialAxisExt : RadialAxis
         List<GaugeLabelInfo> customLabels = new List<GaugeLabelInfo>();
 
         var _minimum = (int)logBase(this.Minimum, 10);
-        var _maximum = (int)logBase(this.Minimum, 10);
+        var _maximum = (int)logBase(this.Maximum, 10);
         for (var i = _minimum; i <= _maximum; i++)
         {
             int value = (int)Math.Floor(Math.Pow(10, i));// logBase  value is 10
